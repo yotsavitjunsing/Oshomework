@@ -17,21 +17,31 @@ void eat(int id){
 
 void eatSpaghetti(int id){
   if((resource[(id+1)%length]==(-1)&&resource[id]==(-1)) || (resource[(id+1)%length]==id||resource[id]==id))
-  {
-        if(resource[(id+1)%length]==(-1) && !finish[id]){
-            printf("Process %d pick up Rigth Fork\n",id);
-            resource[(id+1)%length]=id;
+  {     if(id%2==0){
+            if(resource[(id+1)%length]==(-1) && !finish[id]){
+                printf("Process %d pick up Rigth Fork\n",id);
+                resource[(id+1)%length]=id;
 
 
-        }else if(resource[id]==(-1)&&!finish[id]){
+            }else if(resource[id]==(-1)&&!finish[id]){
+                            resource[id]=id;
+                            printf("Process %d pick up Left Fork\n",id);
+
+                }
+        }
+        else{
+            if(resource[id]==(-1)&&!finish[id]){
                           resource[id]=id;
                          printf("Process %d pick up Left Fork\n",id);
 
+            }else if(resource[(id+1)%length]==(-1) && !finish[id]){
+                 printf("Process %d pick up Rigth Fork\n",id);
+                 resource[(id+1)%length]=id;
+
+
+                }
+            
         }
-        
-    
-        
-        
     }else{
         printf("Process %d wait next round\n",id);
     }
